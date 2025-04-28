@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Tweet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <h1>Shree X</h1>
+        </div>
+    </nav>
+    
+    
+    <div class="main-content">
+        <form action="/tweet_post" method="POST" class="tweet-form">
+    <h1>Post Your Tweet</h1>
+
+            <div class="form-group">
+                <input type="text" id="user_name" name="userName" placeholder="Enter your Name" required>
+            </div>
+            <div class="form-group">
+                <textarea id="user_tweet" name="userTweet" placeholder="What's happening?" required></textarea>
+            </div>
+            <button type="submit" class="tweet-submit-btn">Tweet</button>
+        </form>
+    </div>
+    
+    <footer class="footer">
+        <p>Developed by Anant Shree using EJS, NodeJS, MongoDB</p>
+    </footer>
+</body>
+</html>
