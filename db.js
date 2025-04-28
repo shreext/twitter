@@ -9,9 +9,7 @@ const uri='mongodb+srv://AnantShree_Twitter:Shree%40%239110@cluster0.eqyuh72.mon
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    ssl: true,
-    tlsAllowInvalidCertificates: false, // Only for testing, not production
-    retryWrites: true
+    ssl: false
   });
 
 module.exports={

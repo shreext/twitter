@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 2000;
+const PORT = 2000;
 const { connectToDB, getDb } = require('./db');
 const { ObjectId } = require('mongodb');
 
@@ -17,8 +17,8 @@ let db;
 connectToDB((err) => {
     if (!err) {
         db = getDb();
-        app.listen(port, () => {
-            console.log(`Server running on http://localhost:${port}`);
+        app.listen(PORT, () => {
+            console.log(`Server running on http://localhost:${PORT}`);
         });
     } else {
         console.error('Failed to connect to database:', err);
