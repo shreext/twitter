@@ -6,6 +6,14 @@ let dbConnection;
 
 const uri='mongodb+srv://AnantShree_Twitter:Shree%40%239110@cluster0.eqyuh72.mongodb.net/twitter?retryWrites=true&w=majority';
 
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true,
+    tlsAllowInvalidCertificates: false, // Only for testing, not production
+    retryWrites: true
+  });
+
 module.exports={
     connectToDB:(cb)=>{
         MongoClient.connect(uri)
