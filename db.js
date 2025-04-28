@@ -4,7 +4,7 @@ let dbConnection;
 
 // mongodb+srv://AnantShree_Twitter:Shree@#9110@cluster0.eqyuh72.mongodb.net/
 
-const uri='mongodb+srv://AnantShree_Twitter:Shree%40%239110@cluster0.eqyuh72.mongodb.net/twitter';
+const uri='mongodb+srv://AnantShree_Twitter:Shree%40%239110@cluster0.eqyuh72.mongodb.net/twitter?retryWrites=true&w=majority';
 
 module.exports={
     connectToDB:(cb)=>{
