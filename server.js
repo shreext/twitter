@@ -38,7 +38,7 @@ connectToDB((err) => {
 
 // Routes
 app.use('/', authRoutes);
-app.use('/', tweetRoutes);
+app.use('/tweets', tweetRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
