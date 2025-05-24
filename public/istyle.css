@@ -1,0 +1,276 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #15202b;
+    color: #ffffff;
+}
+
+.navbar {
+    background-color: #15202b;
+    border-bottom: 1px solid #22303c;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Update navbar styles */
+.nav-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left h1 {
+    font-size: 20px;
+    margin: 0;
+    color: #ffffff;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.post-tweet-btn {
+    background-color: #1da1f2;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+@media (max-width: 768px) {
+    .post-tweet-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-tweet-btn {
+        padding: 3px 7px;
+        font-size: 11px;
+    }
+}
+
+.post-tweet-btn:hover {
+    background-color: #1991db;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .nav-content {
+        padding: 10px 15px;
+    }
+
+    .nav-buttons {
+        gap: 10px;
+    }
+
+    .post-tweet-btn {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-content {
+        padding: 8px 12px;
+    }
+
+    .nav-left h1 {
+        font-size: 18px;
+    }
+
+    .post-tweet-btn {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+
+/* Touch device optimization */
+@media (hover: none) and (pointer: coarse) {
+    .post-tweet-btn {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Handle very small screens */
+@media (max-width: 320px) {
+    .nav-content {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .post-tweet-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.main-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 70px;
+}
+
+.tweet {
+    background-color: #192734;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #22303c;
+}
+
+.tweet-content h4 {
+    color: #8899ac;
+    font-size: 14px;
+    margin: 0 0 8px 0;
+}
+
+.tweet-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    color: #ffffff;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 15px;
+    background-color: #192734;
+    border-top: 1px solid #22303c;
+    color: #8899ac;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+.footer p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 15px;
+    }
+
+    .nav-content {
+        padding: 10px 15px;
+    }
+
+    .tweet {
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    .post-tweet-btn {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 10px;
+    }
+
+    .nav-content {
+        padding: 8px 12px;
+    }
+
+    .nav-content h1 {
+        font-size: 18px;
+    }
+
+    .post-tweet-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .tweet {
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .tweet-content h4 {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .tweet-content p {
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .footer {
+        padding: 15px;
+        margin-top: 30px;
+        font-size: 12px;
+    }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+    .post-tweet-btn {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tweet {
+        cursor: default;
+    }
+
+    .tweet:active {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+}
+
+/* Handle very small screens */
+@media (max-width: 320px) {
+    .nav-content {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .post-tweet-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tweet {
+        padding: 10px;
+    }
+
+    .tweet-content p {
+        font-size: 14px;
+    }
+}

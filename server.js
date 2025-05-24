@@ -1,88 +1,47 @@
-const express = require('express');
-const path = require('path');
+// auth routes only for authentication for login and register
+// user routes for all tweets function
+require("dotenv").config();
+const express = require("express");
+const path = require("path");
+const session = require('express-session');
+const { connectToDB, getDb } = require("./db");
 const app = express();
-const PORT = process.env.PORT || 2000; // Use environment variable for port
-const { connectToDB, getDb } = require('./db');
-const { ObjectId } = require('mongodb');
+const PORT = process.env.PORT || 2000;
+
+// Import routes
+const authRoutes = require('./routes/authRoutes');
+const tweetRoutes = require('./routes/tweetRoutes');
 
 // Configuration
-app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'views')));
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-let db;
+app.use(session({
+  secret: 'shree9110',
+  resave: false,
+  saveUninitialized: false
+}));
 
-// Connect to DB first, then start server
+// Connect to DB
 connectToDB((err) => {
-    if (err) {
-        console.error('Failed to connect to database:', err);
-        process.exit(1); // Exit if DB connection fails
-    }
-    
-    db = getDb();
-    app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
-    });
-});
+  if (err) {
+    console.error("Failed to connect to database:", err);
+    process.exit(1);
+  }
 
-// Helper function with better error handling
-async function getTweets() {
-    try {
-        return await db.collection('tweets').find().sort({ _id: -1 }).toArray();
-    } catch (err) {
-        console.error('Error fetching tweets:', err);
-        throw err; // Re-throw to be handled by route
-    }
-}
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+});
 
 // Routes
-app.get("/", async (req, res) => {
-    try {
-        const tweets = await getTweets();
-        res.render('index', { tweets });
-    } catch (err) {
-        console.error('Error:', err);
-        res.status(500).render('error', { message: 'Could not fetch tweets' });
-    }
-});
-
-app.get("/post", (req, res) => {
-    res.render('post');
-});
-
-app.post('/tweet_post', async (req, res) => {
-    const user_tweet = req.body;
-    
-    try {
-        const result = await db.collection('tweets').insertOne(user_tweet);
-        const tweets = await getTweets();
-        res.render('index', { tweets });
-    } catch (err) {
-        console.error('Error posting tweet:', err);
-        res.status(500).render('error', { message: 'Could not post tweet' });
-    }
-});
-
-app.post("/deleteTweet", async (req, res) => {
-    const user_ID = req.body.tweetId;
-    
-    if (!ObjectId.isValid(user_ID)) {
-        return res.status(400).json({ error: "Not a valid document ID" });
-    }
-
-    try {
-        await db.collection('tweets').deleteOne({ _id: new ObjectId(user_ID) });
-        const tweets = await getTweets();
-        res.render('index', { tweets });
-    } catch (err) {
-        console.error('Error deleting tweet:', err);
-        res.status(500).json({ error: "Could not delete tweet" });
-    }
-});
+app.use('/', authRoutes);
+app.use('/', tweetRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).render('error', { message: 'Something went wrong!' });
+  console.error(err.stack);
+  res.status(500).render("error", { message: "Something went wrong!" });
 });

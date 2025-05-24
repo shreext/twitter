@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Profile - <%= user.name %></title>
+    <link rel="stylesheet" href="/profile.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-content">
+        <div class="nav-left">
+          <h1>Profile</h1>
+        </div>
+        <div class="nav-buttons">
+          <a href="/post" class="post-tweet-btn">Post Tweet</a>
+          <a href="/home" class="post-tweet-btn">All Tweets</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="left-section">
+        <div class="main-content">
+          <% if (tweets && tweets.length > 0) { %>
+            <% tweets.forEach(tweet => { %>
+              <div class="tweet">
+                <div class="tweet-content">
+                  <h4><%= user.name %></h4>
+                  <p><%= tweet.content %></p>
+                </div>
+                <form action="/deleteTweet" method="POST">
+                  <input type="hidden" name="tweetId" value="<%= tweet._id %>">
+                  <button type="submit">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </form>
+              </div>
+            <% }); %>
+          <% } else { %>
+            <p class="no-tweets">No tweets found in the database.</p>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="right-section">
+        <div class="profile-container">
+          <div class="profile-card">
+            <div class="profile-image-container">
+              <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=<%= user.name %>" alt="Profile" class="profile-image">
+            </div>
+            <h4 class="profile-header">Welcome, <%= user.name %>!</h4>
+            <p class="profile-email">Email: <%= user.email %></p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Developed by Anant Shree using EJS, NodeJS, MongoDB</p>
+    </footer>
+  </body>
+</html>
