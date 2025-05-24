@@ -19,16 +19,9 @@ const authController = {
     register: async (req, res) => {
         try {
             const user = new User();
-            const saltRound=10;
             user.name = req.body.username;
             user.email = req.body.email;
-
-            bcrypt.hash(req.body.password,saltRound,async function(err,hash){
-                if(err){
-                    console.log(err);
-                }
-                user.password=hash;
-            })
+            user.password = req.body.password;
            
             const existingUser = await User.findOne({ email: user.email });
             if (existingUser) return res.status(400).send("Email already exist");
@@ -45,27 +38,32 @@ const authController = {
     // Login User by verifying email in db and then matching email with password 
     login: async (req, res) => {
         try {
-            const { email: uEmail, password: uPass } = req.body; // User Enter
-
-            const existingUser = await User.findOne({ email: uEmail }); // DB Email 
-            
-            bcrypt.compare(uPass,existingUser.password,function(err,result){
-                if(err){
-                    console.log(err);
-                }
-                if(result){
-                    console.log("password matched");
-                    req.session.userId = existingUser._id;
-                    res.redirect("/tweets/profile");
-                }
-                else{
-                    console.log("password not matched");
-                }
-            })
-        } catch (err) {
-            console.error("Error logging in:", err);
-            res.status(500).json({ error: "Could not login user" });
+            const { email: uEmail, password: uPass } = req.body;
+        
+            const existingUser = await User.findOne({ email: uEmail });
+        
+            // Check if user exists
+            if (!existingUser) {
+                console.log("User not found");
+                return res.status(400).send("Invalid email or password");
+            }
+        
+            // Check if password same
+            if (uPass == existingUser.password) {
+                console.log("Password matched ", uPass, " ", existingUser.password);
+                req.session.userId = existingUser._id;
+                return res.redirect("/tweets/profile");
+               
+            }else{
+                console.log("Password not matched");
+                return res.status(400).send("Invalid email or password");
+            }
+        
+        } catch (error) {
+            console.error("Login error:", error);
+            res.status(500).send("Something went wrong");
         }
+        
     }
 };
 
