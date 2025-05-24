@@ -14,8 +14,8 @@
           <h1>Profile</h1>
         </div>
         <div class="nav-buttons">
-          <a href="/post" class="post-tweet-btn">Post Tweet</a>
-          <a href="/home" class="post-tweet-btn">All Tweets</a>
+          <a href="/tweets/post" class="post-tweet-btn">Post Tweet</a>
+          <a href="/tweets/home" class="post-tweet-btn">All Tweets</a>
         </div>
       </div>
     </nav>
@@ -30,7 +30,7 @@
                   <h4><%= user.name %></h4>
                   <p><%= tweet.content %></p>
                 </div>
-                <form action="/deleteTweet" method="POST">
+                <form action="/tweets/deleteTweet" method="POST">
                   <input type="hidden" name="tweetId" value="<%= tweet._id %>">
                   <button type="submit">
                     <span class="material-symbols-outlined">delete</span>

@@ -56,7 +56,7 @@ const authController = {
                 if(result){
                     console.log("password matched");
                     req.session.userId = existingUser._id;
-                    res.redirect("/profile");
+                    res.redirect("/tweets/profile");
                 }
                 else{
                     console.log("password not matched");

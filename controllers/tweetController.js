@@ -51,7 +51,7 @@ const tweetController = {
       const db = getDb();
       await db.collection("tweets").insertOne(user_tweet);
 
-      res.redirect("/profile");
+      res.redirect("/tweets/profile");
     } catch (err) {
       console.error("Error posting tweet:", err);
       res.status(500).render("error", { message: "Could not post tweet" });
@@ -68,7 +68,7 @@ const tweetController = {
     try {
       const db = getDb();
       await db.collection("tweets").deleteOne({ _id: new ObjectId(user_ID) });
-      res.redirect("/profile");
+      res.redirect("/tweets/profile");
     } catch (err) {
       console.error("Error deleting tweet:", err);
       res.status(500).json({ error: "Could not delete tweet" });
@@ -80,7 +80,6 @@ const tweetController = {
       return res.redirect("/login");
     }
     const user = await User.findById(req.session.userId);
-    // here author take the user id of the login user which store in session
     const userTweets = await Tweet.find({ author: user._id }).sort({
       createdAt: -1,
     });
