@@ -1,5 +1,13 @@
 # Twitter Clone Backend
 
+# My Project
+
+## 🖼 Screenshot
+![Screenshot](ss.png)
+
+## 🎬 Demo Video
+<video src="trex.mp4" controls width="600"></video>
+
 A simple backend application for a Twitter clone, built with Node.js, Express, and MongoDB.
 
 ## Features
